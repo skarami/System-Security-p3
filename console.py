@@ -17,7 +17,6 @@ def console(sock):
         if stdin2sock:
             wlist.append(sock)
         elif input_closed:
-            sock.shutdown(socket.SHUT_WR)
             input_closed = False
         if sock2stdout:
             wlist.append(sys.stdout)
